@@ -61,26 +61,6 @@ export default {
   display: none !important;
 }
 
-.container-navbar {
-  text-align: end;
-  float: right;
-  padding-right: 0px;
-  margin-left: 0;
-}
-#menu-button {
-  display: none;
-}
-#botoes-menu {
-  display: block;
-}
-#btn-menu-drawer {
-  display: none;
-}
-
-.mostrarLogo {
-  display: block;
-}
-
 .navbar-button {
   font-size: 14px !important;
 }
@@ -92,15 +72,6 @@ export default {
 }
 
 @media (max-width: 850px) {
-  .btn-store {
-    font-size: 11px !important;
-    padding: 7px !important;
-  }
-
-  .btn-store icon {
-    font-size: 12px;
-  }
-
   .navbar-button {
     font-size: 11px !important;
     padding: 0;
@@ -110,14 +81,6 @@ export default {
 }
 
 @media (max-width: 729px) {
-  #menu-button {
-    display: block;
-  }
-
-  #btn-menu-drawer {
-    display: block;
-  }
-
   #botoes-menu {
     display: none;
   }

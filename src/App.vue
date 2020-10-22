@@ -5,8 +5,9 @@
         <Navbar/>
         <router-view/>
       </v-content>
+      <Footer></Footer>
     </v-app>
-    <Footer></Footer>
+
   </v-content>
 </template>
 
