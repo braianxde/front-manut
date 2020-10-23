@@ -58,6 +58,7 @@ export default class ApiService {
     return {
       headers: {
         'Content-Type': 'application/json',
+        'AuthorizationManut': localStorage.getItem("TOKENMANUT"),
         Accept: 'application/json'
       }
     };
