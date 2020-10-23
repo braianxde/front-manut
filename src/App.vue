@@ -1,25 +1,23 @@
 <template>
-  <v-content>
+  <v-main>
     <v-app style="min-height: 100vh;">
-      <v-content>
-        <Navbar/>
+      <v-main>
+        <router-view name="menu"/>
         <router-view/>
-      </v-content>
+      </v-main>
       <Footer></Footer>
     </v-app>
 
-  </v-content>
+  </v-main>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
 import Footer from "@/components/Footer";
 
 export default {
   name: 'App',
   components: {
-    Footer,
-    Navbar
+    Footer
   }
 }
 </script>

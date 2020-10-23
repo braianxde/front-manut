@@ -1,16 +1,13 @@
 <template>
-  <v-main>
-
-  </v-main>
+<v-main>
+  Chamados
+</v-main>
 </template>
 
 <script>
 export default {
-  name: 'Home',
-  data() {
-    return {};
-  }
-};
+name: "Chamados"
+}
 </script>
 
 <style scoped>

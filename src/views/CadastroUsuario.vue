@@ -1,16 +1,13 @@
 <template>
   <v-main>
-
+    Cadastro de Usuario
   </v-main>
 </template>
 
 <script>
 export default {
-  name: 'Home',
-  data() {
-    return {};
-  }
-};
+name: "CadastroUsuario"
+}
 </script>
 
 <style scoped>

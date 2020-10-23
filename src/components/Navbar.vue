@@ -1,7 +1,6 @@
 <template>
   <v-card dark flat tile>
     <v-toolbar class="toolbar-navbarmenu">
-      <img :src="imageUrl" height="26" id="logo" style="cursor:pointer; display:block" />
       <v-spacer></v-spacer>
 
       <v-toolbar-items id="botoes-menu">
@@ -34,8 +33,8 @@
                 text
                 v-on="on"
                 class="navbar-button"
-                @click="navigateTo('MeusReembolsos')"
-            >Menu 3</v-btn>
+                @click="logout()"
+            >LOGOUT</v-btn>
           </template>
         </v-menu>
 
@@ -51,16 +50,16 @@ export default {
   methods: {
     navigateTo: function(nameRoute) {
       router.push(nameRoute);
+    },
+    logout: function (){
+      localStorage.removeItem("TOKENMANUT");
+      this.navigateTo('/')
     }
   }
 };
 </script>
 
 <style scoped>
-#logo {
-  display: none !important;
-}
-
 .navbar-button {
   font-size: 14px !important;
 }
@@ -77,16 +76,6 @@ export default {
     padding: 0;
     margin: 0;
     min-width: 48px;
-  }
-}
-
-@media (max-width: 729px) {
-  #botoes-menu {
-    display: none;
-  }
-
-  #logo {
-    display: block !important;
   }
 }
 </style>
