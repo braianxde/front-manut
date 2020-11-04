@@ -7,11 +7,12 @@
         <v-menu class="navbar-button">
           <template v-slot:activator="{ on }">
             <v-btn
+                @click="navigateTo('Home')"
                 text
                 color="white"
                 v-on="on"
                 class="navbar-button"
-            >menu 1</v-btn>
+            >Home</v-btn>
           </template>
         </v-menu>
 

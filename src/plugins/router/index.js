@@ -17,17 +17,17 @@ const routes = [
     path: "/home",
     name: "Home",
     components: {
-      default: Navbar,
-      view: Home,
+      default: Home,
+      menu: Navbar,
     },
     props: true
   },
   {
-    path: "/chamados",
+    path: "/Chamados",
     name: "Chamados",
     components: {
-      default: Navbar,
-      view: Chamados,
+      default: Chamados,
+      menu: Navbar,
     },
     props: true
   },
