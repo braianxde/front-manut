@@ -1,12 +1,17 @@
 <template>
 <v-main>
-  Chamados
+  <div>
+    teste
+  </div>
 </v-main>
 </template>
 
 <script>
 export default {
-name: "Chamados"
+name: "Chamados",
+mounted() {
+    console.log("chegou");
+}
 }
 </script>
 

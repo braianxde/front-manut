@@ -18,11 +18,12 @@
         <v-menu class="navbar-button">
           <template v-slot:activator="{ on }">
             <v-btn
+                @click="navigateTo('Chamados')"
                 text
                 color="white"
                 v-on="on"
                 class="navbar-button"
-            >menu 2</v-btn>
+            >Chamados</v-btn>
           </template>
         </v-menu>
 

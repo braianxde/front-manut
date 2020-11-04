@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from "@/views/Home";
 import Login from "@/views/Login";
+import Chamados from "@/views/Chamados";
 import Navbar from "@/components/Navbar";
-import CadastroUsuario from "@/views/CadastroUsuario";
 
 Vue.use(VueRouter)
 
@@ -14,20 +14,20 @@ const routes = [
     component: Login
   },
   {
-    path: "/cadastro-usuario",
-    name: "CadastroUsuario",
-    components: {
-      default: CadastroUsuario,
-      menu: Navbar,
-    },
-    props: true
-  },
-  {
     path: "/home",
     name: "Home",
     components: {
       default: Navbar,
-      menu: Home,
+      view: Home,
+    },
+    props: true
+  },
+  {
+    path: "/chamados",
+    name: "Chamados",
+    components: {
+      default: Navbar,
+      view: Chamados,
     },
     props: true
   },
