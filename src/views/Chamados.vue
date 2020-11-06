@@ -10,29 +10,59 @@
         <v-toolbar
             flat
         >
-          <v-toolbar-title>Chamados</v-toolbar-title>
+          <v-toolbar-title>Meus Chamados</v-toolbar-title>
           <v-divider
               class="mx-4"
               inset
               vertical
           ></v-divider>
           <v-spacer></v-spacer>
+          <!-- Dialog Explorar Chamado -->
+          <v-dialog v-model="dialogExplorar" max-width="500px">
+            <v-card>
+              <v-card-title class="cyan White--text">
+                <span class="headline">Chamado nº -- </span>
+              </v-card-title>
+              <v-card-text>
+                <div>
+                  <span>Solicitante: Marcio Becker</span>
+                  <span>Matricula: 36515</span>
+                </div>
+                <hr>
+                <div>
+                  <span>Equipamento: nome equipamento</span>
+                  <span>Descrição: ...descrição...</span>
+                  <span>Nº Patrimônio: 123456</span>
+                </div>
+                <hr>
+                <div>
+                  <span>Data de Abertura: 22/55/11</span>
+                  <span>Status: Ativo </span>
+                  <span>Area Técnica: TI</span>
+                  <span>Técnico Responsável: Braian</span>
+                </div>
+                <hr>
+                <div>
+                  <span>Assunto: gggggggggggg</span>
+                  <span>Texto: pppppppppppppppppp</span>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                  <v-btn color="green darken-1" text @click="dialogExplorar = false">
+                    Fechar
+                  </v-btn>
+              </v-card-actions>
+              
+
+            </v-card>
+          </v-dialog>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon
-            small
-            class="mr-2"
-            @click="editItem(item)"
-        >
-          edit
-        </v-icon>
-        <v-icon
-            small
-            @click="deleteItem(item)"
-        >
-          delete
-        </v-icon>
+        <v-btn class="mr8" fab dark small color="cyan" @click="explorar(item)">
+          <v-icon dark>mdi-pencil</v-icon>
+        </v-btn>
       </template>
       <template v-slot:no-data>
         <v-btn
@@ -51,14 +81,17 @@ import axios from "@/plugins/axios";
 export default {
   name: "Chamados",
   data: () => ({
+    dialogExplorar: false,
     chamados: [],
     headers: [
       {
-        text: 'Assunto',
+        text: 'ID',
         align: 'start',
         sortable: false,
-        value: 'assunto',
+        value: 'id',
       },
+      { text: 'Assunto', value: 'assunto' },
+      { text: 'Matrícula', value: 'idUsuario' },
       { text: 'Data Abertura', value: 'dataAbertura' },
       { text: 'Data Fechamento', value: 'dataFechamento' },
       { text: 'Actions', value: 'actions', sortable: false },
@@ -68,11 +101,8 @@ export default {
     this.chamados = await axios.get("chamado");
   },
   methods: {
-    editItem (item) {
-      console.log(item);
-    },
-    deleteItem (item) {
-      console.log(item);
+    explorar () {
+      this.dialogExplorar = true
     },
   },
 }
