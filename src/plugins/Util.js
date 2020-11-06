@@ -39,4 +39,12 @@ export default class Util {
     const [month, day, year] = date.split("/");
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   }
+
+  static getStatus(status){
+    if(status == 1){
+      return "Aberto"
+    }else{
+      return "Encerrado"
+    }
+  }
 }

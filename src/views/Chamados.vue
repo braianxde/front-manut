@@ -17,50 +17,11 @@
               vertical
           ></v-divider>
           <v-spacer></v-spacer>
-          <!-- Dialog Explorar Chamado -->
-          <v-dialog v-model="dialogExplorar" max-width="500px">
-            <v-card>
-              <v-card-title class="cyan White--text">
-                <span class="headline">Chamado nº -- </span>
-              </v-card-title>
-              <v-card-text>
-                <div>
-                  <span>Solicitante: Marcio Becker</span>
-                  <span>Matricula: 36515</span>
-                </div>
-                <hr>
-                <div>
-                  <span>Equipamento: nome equipamento</span>
-                  <span>Descrição: ...descrição...</span>
-                  <span>Nº Patrimônio: 123456</span>
-                </div>
-                <hr>
-                <div>
-                  <span>Data de Abertura: 22/55/11</span>
-                  <span>Status: Ativo </span>
-                  <span>Area Técnica: TI</span>
-                  <span>Técnico Responsável: Braian</span>
-                </div>
-                <hr>
-                <div>
-                  <span>Assunto: gggggggggggg</span>
-                  <span>Texto: pppppppppppppppppp</span>
-                </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                  <v-btn color="green darken-1" text @click="dialogExplorar = false">
-                    Fechar
-                  </v-btn>
-              </v-card-actions>
-              
 
-            </v-card>
-          </v-dialog>
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-btn class="mr8" fab dark small color="cyan" @click="explorar(item)">
+        <v-btn class="mr8" fab dark small color="cyan" @click="detalheChamado(item)">
           <v-icon dark>mdi-pencil</v-icon>
         </v-btn>
       </template>
@@ -72,16 +33,20 @@
         </v-btn>
       </template>
     </v-data-table>
+    <ChamadoDetalheDialog :infochamado="this.infoChamado" v-model="dialogExplorar" v-if="dialogExplorar"></ChamadoDetalheDialog>
   </v-main>
 </template>
 
 <script>
 import axios from "@/plugins/axios";
+import ChamadoDetalheDialog from "@/components/ChamadoDetalheDialog";
 
 export default {
   name: "Chamados",
+  components: {ChamadoDetalheDialog},
   data: () => ({
     dialogExplorar: false,
+    infoChamado: null,
     chamados: [],
     headers: [
       {
@@ -101,7 +66,11 @@ export default {
     this.chamados = await axios.get("chamado");
   },
   methods: {
-    explorar () {
+    async detalheChamado (item) {
+      let idChamado = item.id;
+      let detalhe = await axios.get("chamados/" +  idChamado);
+      console.log(detalhe);
+      this.infoChamado = detalhe[0];
       this.dialogExplorar = true
     },
   },
