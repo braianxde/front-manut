@@ -1,6 +1,6 @@
 <template>
   <v-main>
-  Home
+    Home
   </v-main>
 </template>
 

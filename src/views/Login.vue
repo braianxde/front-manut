@@ -25,15 +25,16 @@
                 type="password"
                 v-on:keyup.enter="authenticate"
             ></v-text-field>
-                <v-btn
-                    @click="authenticate"
-                    :loading="isLoading"
-                    :disabled="!isValidForm"
-                    block
-                    x-large
-                    color="success"
-                    dark
-                >Logar</v-btn>
+            <v-btn
+                @click="authenticate"
+                :loading="isLoading"
+                :disabled="!isValidForm"
+                block
+                x-large
+                color="success"
+                dark
+            >Logar
+            </v-btn>
           </v-form>
         </v-container>
       </v-col>
@@ -61,9 +62,10 @@ export default {
         ref.isLoading = true;
 
         const authUser = await axios.post("login", this.credentials);
+
         if (authUser.success) {
           this.$toasted.success("Logado com sucesso");
-          localStorage.setItem("TOKENMANUT", authUser.data);
+          localStorage.setItem("USUARIOMANUT", JSON.stringify(authUser.data));
           await this.$router.push("Home");
         } else {
           this.isLoading = false;

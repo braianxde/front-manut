@@ -12,7 +12,8 @@
                 color="white"
                 v-on="on"
                 class="navbar-button"
-            >Home</v-btn>
+            >Home
+            </v-btn>
           </template>
         </v-menu>
 
@@ -24,7 +25,8 @@
                 color="white"
                 v-on="on"
                 class="navbar-button"
-            >Chamados</v-btn>
+            >Chamados
+            </v-btn>
           </template>
         </v-menu>
 
@@ -36,7 +38,8 @@
                 v-on="on"
                 class="navbar-button"
                 @click="logout()"
-            >LOGOUT</v-btn>
+            >LOGOUT
+            </v-btn>
           </template>
         </v-menu>
 
@@ -47,14 +50,15 @@
 </template>
 <script>
 import router from "../plugins/router";
+
 export default {
   name: "Navbar",
   methods: {
-    navigateTo: function(nameRoute) {
+    navigateTo: function (nameRoute) {
       router.push(nameRoute);
     },
-    logout: function (){
-      localStorage.removeItem("TOKENMANUT");
+    logout: function () {
+      localStorage.removeItem("USUARIOMANUT");
       this.navigateTo('/')
     }
   }
@@ -65,6 +69,7 @@ export default {
 .navbar-button {
   font-size: 14px !important;
 }
+
 @media (max-width: 950px) {
   .navbar-button {
     font-size: 13px !important;

@@ -40,11 +40,15 @@ export default class Util {
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   }
 
-  static getStatus(status){
-    if(status == 1){
+  static getStatus(status) {
+    if (status == 1) {
       return "Aberto"
-    }else{
+    } else {
       return "Encerrado"
     }
+  }
+
+  static getInfoUsuario() {
+    return JSON.parse(localStorage.getItem("USUARIOMANUT"));
   }
 }

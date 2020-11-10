@@ -10,9 +10,9 @@
         <v-toolbar
             flat
         >
-        <v-btn class="mr8" fab dark small color="green" @click="novoChamado()">
-          <v-icon dark>mdi-pencil</v-icon>
-        </v-btn>
+          <v-btn class="mr8" fab dark small color="green" @click="abreNovoChamadoDialog()">
+            <v-icon dark>mdi-pencil</v-icon>
+          </v-btn>
           <v-toolbar-title>Meus Chamados</v-toolbar-title>
           <v-divider
               class="mx-4"
@@ -36,10 +36,9 @@
         </v-btn>
       </template>
     </v-data-table>
-    <ChamadoDetalheDialog :infochamado="this.infoChamado" v-model="dialogExplorar" v-if="dialogExplorar"></ChamadoDetalheDialog>
-    <CriarChamadoDialog :novochamado="this.novoChamado" v-model="dialogCriarChamado" v-if="dialogCriarChamado"></CriarChamadoDialog>
-    
-    
+    <ChamadoDetalheDialog :infochamado="this.infoChamado" v-model="dialogExplorar"
+                          v-if="dialogExplorar"></ChamadoDetalheDialog>
+    <CriarChamadoDialog v-model="dialogCriarChamado" v-if="dialogCriarChamado"></CriarChamadoDialog>
   </v-main>
 </template>
 
@@ -47,6 +46,7 @@
 import axios from "@/plugins/axios";
 import ChamadoDetalheDialog from "@/components/ChamadoDetalheDialog";
 import CriarChamadoDialog from "@/components/CriarChamadoDialog";
+import Util from "@/plugins/Util";
 
 export default {
   name: "Chamados",
@@ -64,25 +64,25 @@ export default {
         sortable: false,
         value: 'id',
       },
-      { text: 'Assunto', value: 'assunto' },
-      { text: 'Matrícula', value: 'idUsuario' },
-      { text: 'Data Abertura', value: 'dataAbertura' },
-      { text: 'Data Fechamento', value: 'dataFechamento' },
-      { text: 'Actions', value: 'actions', sortable: false },
+      {text: 'Assunto', value: 'assunto'},
+      {text: 'Matrícula', value: 'idUsuario'},
+      {text: 'Data Abertura', value: 'dataAbertura'},
+      {text: 'Data Fechamento', value: 'dataFechamento'},
+      {text: 'Actions', value: 'actions', sortable: false},
     ]
   }),
-  async created () {
+  async created() {
+    console.log(Util.getInfoUsuario().nome);
     this.chamados = await axios.get("chamado");
   },
   methods: {
-    async detalheChamado (item) {
+    async detalheChamado(item) {
       let idChamado = item.id;
-      let detalhe = await axios.get("chamados/" +  idChamado);
-      console.log(detalhe);
+      let detalhe = await axios.get("chamados/" + idChamado);
       this.infoChamado = detalhe[0];
       this.dialogExplorar = true
     },
-    novoChamado(){
+    abreNovoChamadoDialog() {
       this.dialogCriarChamado = true
     }
   },

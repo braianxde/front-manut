@@ -4,6 +4,7 @@ import Home from "@/views/Home";
 import Login from "@/views/Login";
 import Chamados from "@/views/Chamados";
 import Navbar from "@/components/Navbar";
+import Util from "@/plugins/Util";
 
 Vue.use(VueRouter)
 
@@ -46,8 +47,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let isAuthenticated = localStorage.getItem("TOKENMANUT");
-  console.log(to.name);
+  let usuarioManut = Util.getInfoUsuario();
+  let isAuthenticated = null;
+
+  if (usuarioManut) {
+    isAuthenticated = usuarioManut.token;
+  }
+
   if (to.name !== 'Login' && !isAuthenticated) {
     Vue.toasted.error("Usuario nao esta logado");
     next({name: 'Login'})

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Vue from "vue";
+import Util from "@/plugins/Util";
 
 export default class ApiService {
   static async get(endpoint) {
@@ -15,7 +16,7 @@ export default class ApiService {
           return response;
         })
 
-      if(!request.data.success){
+      if (!request.data.success) {
         Vue.toasted.error(request.data.msg);
       }
 
@@ -43,7 +44,7 @@ export default class ApiService {
           return response;
         })
 
-      if(!request.data.success){
+      if (!request.data.success) {
         Vue.toasted.error(request.data.msg);
       }
 
@@ -55,10 +56,18 @@ export default class ApiService {
   }
 
   static mountHeaders() {
+
+    let usuarioManut = Util.getInfoUsuario();
+    let token = "";
+
+    if (usuarioManut) {
+      token = usuarioManut.token;
+    }
+
     return {
       headers: {
         'Content-Type': 'application/json',
-        'AuthorizationManut': localStorage.getItem("TOKENMANUT"),
+        'AuthorizationManut': token,
         Accept: 'application/json'
       }
     };
