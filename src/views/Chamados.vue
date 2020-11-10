@@ -10,6 +10,9 @@
         <v-toolbar
             flat
         >
+        <v-btn class="mr8" fab dark small color="green" @click="novoChamado()">
+          <v-icon dark>mdi-pencil</v-icon>
+        </v-btn>
           <v-toolbar-title>Meus Chamados</v-toolbar-title>
           <v-divider
               class="mx-4"
@@ -34,19 +37,25 @@
       </template>
     </v-data-table>
     <ChamadoDetalheDialog :infochamado="this.infoChamado" v-model="dialogExplorar" v-if="dialogExplorar"></ChamadoDetalheDialog>
+    <CriarChamadoDialog :novochamado="this.novoChamado" v-model="dialogCriarChamado" v-if="dialogCriarChamado"></CriarChamadoDialog>
+    
+    
   </v-main>
 </template>
 
 <script>
 import axios from "@/plugins/axios";
 import ChamadoDetalheDialog from "@/components/ChamadoDetalheDialog";
+import CriarChamadoDialog from "@/components/CriarChamadoDialog";
 
 export default {
   name: "Chamados",
-  components: {ChamadoDetalheDialog},
+  components: {ChamadoDetalheDialog, CriarChamadoDialog},
   data: () => ({
     dialogExplorar: false,
+    dialogCriarChamado: false,
     infoChamado: null,
+    novoChamado: null,
     chamados: [],
     headers: [
       {
@@ -73,6 +82,9 @@ export default {
       this.infoChamado = detalhe[0];
       this.dialogExplorar = true
     },
+    novoChamado(){
+      this.dialogCriarChamado = true
+    }
   },
 }
 </script>
