@@ -85,10 +85,15 @@ export default {
   },
   methods:{
     async pesquisaEquipamento(id_patrimonio) {
-      let idEquipamento = id_patrimonio;
-      let equip = await axios.get("equipamentoId/" + idEquipamento);
+      let equip = await axios.get("equipamentoId/" + id_patrimonio);
       this.equipSelecionado = equip[0];
       console.log(this.equipSelecionado);
+    },
+    submit() {
+      console.log(this.id_patrimonio)
+    },
+    clear (){
+      this.dialogCriarChamado = false
     }
   }
 }
