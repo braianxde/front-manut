@@ -28,7 +28,6 @@
       <v-card class="mx-auto mb-2" max-width="580">
         <v-card-text>
           <p class="title sm-1 mb-1 text-left">Área Técnica</p>
-          <input type="text" v-model="descricao">
         <v-select class="mt-n8 text-left" v-model="areaTecnicaSelecionada" :items="areaTecnica"></v-select>
         </v-card-text>
       </v-card>
@@ -75,7 +74,6 @@ export default {
   computed: {
     dialogCriarChamado: {
       get() {
-        console.log(this.novochamado);
         return this.value;
       },
       set(value) {
@@ -84,13 +82,23 @@ export default {
     }
   },
   methods:{
-    async pesquisaEquipamento(id_patrimonio) {
-      let equip = await axios.get("equipamentoId/" + id_patrimonio);
+    async pesquisaEquipamento() {
+      let equip = await axios.get("equipamentoId/" + this.id_patrimonio);
       this.equipSelecionado = equip[0];
       console.log(this.equipSelecionado);
     },
-    submit() {
-      console.log(this.id_patrimonio)
+    async submit() {
+      let objetoEnviaChamado = {
+        idEquipamento: this.id_patrimonio,
+        aaaa: this.id_patrimonio,
+        bbbb: this.id_patrimonio,
+        vvvv: this.id_patrimonio
+      };
+
+      const retornoCadastroChamado = await axios.post("chamado", objetoEnviaChamado);
+      this.$toasted.success("Cadastrado com sucesso");
+      this.clear();
+      console.log(retornoCadastroChamado)
     },
     clear (){
       this.dialogCriarChamado = false
