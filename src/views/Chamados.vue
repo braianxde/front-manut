@@ -20,10 +20,9 @@
               vertical
           ></v-divider>
           <v-spacer></v-spacer>
-
         </v-toolbar>
       </template>
-      <template v-slot:item.actions="{ item }">
+      <template v-slot:[`item.actions`]="{ item }">>
         <v-btn class="mr8" fab dark small color="cyan" @click="detalheChamado(item)">
           <v-icon dark>mdi-pencil</v-icon>
         </v-btn>
@@ -78,7 +77,7 @@ export default {
   methods: {
     async detalheChamado(item) {
       let idChamado = item.id;
-      let detalhe = await axios.get("chamados/" + idChamado);
+      let detalhe = await axios.get("chamadoCompleto/" + idChamado);
       this.infoChamado = detalhe[0];
       this.dialogExplorar = true
     },
