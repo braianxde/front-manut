@@ -52,19 +52,20 @@ export default {
     dialogCriarChamado: false,
     infoChamado: null,
     novoChamado: null,
+    usuario: '',
     chamados: [],
     headers: [
       {text: 'ID', align: 'start', sortable: false, value: 'id'},
       {text: 'Assunto', value: 'assunto'},
-      {text: 'Matrícula', value: 'idUsuario'},
+      {text: 'Equipamento', value: 'nome_equipamento'},
       {text: 'Data Abertura', value: 'dataAbertura'},
-      {text: 'Data Fechamento', value: 'dataFechamento'},
+      {text: 'Área Técnica', value: 'areaTecnica'},
       {text: 'Actions', value: 'actions', sortable: false},
     ]
   }),
   async created() {
-    console.log(Util.getInfoUsuario().idAreaTec);
-    this.chamados = await axios.get("chamado");
+    this.usuario = (Util.getInfoUsuario().id);
+    this.chamados = await axios.get("chamadosPorUsuario/" + this.usuario);
   },
   methods: {
     async detalheChamado(item) {

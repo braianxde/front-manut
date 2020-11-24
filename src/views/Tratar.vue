@@ -16,7 +16,7 @@
         <v-btn height="30" width="30" @click="detalheChamado(item)">
           <img src="../assets/detalhe.png"/>
         </v-btn>
-        <v-btn height="30" width="30" @click="tratarChamado(item)">
+        <v-btn v-if="item.status == 1" height="30" width="30" @click="tratarChamado(item)">
           <img src="../assets/tratar.png"/>
         </v-btn>
       </template>
@@ -52,7 +52,7 @@ export default {
     headers: [
       {text: 'ID', align: 'start', sortable: false, value: 'id'},
       {text: 'Assunto', value: 'assunto'},
-      {text: 'Matrícula', value: 'idUsuario'},
+      {text: 'Solicitante', value: 'solicitante'},
       {text: 'Data Abertura', value: 'dataAbertura'},
       {text: 'Data Fechamento', value: 'dataFechamento'},
       {text: 'Técnico', value: 'tecnico'},

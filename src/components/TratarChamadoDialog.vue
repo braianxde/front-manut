@@ -132,7 +132,7 @@ export default {
       let objetoAlterarChamado = {
         idAreaTec: this.idAreaTec,
         idEquipamento: this.id_patrimonio,
-        staus: this.status
+        status: this.status
       };
       const retornoAlteraChamado = await axios.post("chamado/"+ this.idChamado, objetoAlterarChamado);
       this.$toasted.success("Alterado com sucesso");
