@@ -33,6 +33,19 @@
         <v-menu class="navbar-button">
           <template v-slot:activator="{ on }">
             <v-btn
+                @click="navigateTo('Tratar')"
+                text
+                color="white"
+                v-on="on"
+                class="navbar-button"
+            >Tratar
+            </v-btn>
+          </template>
+        </v-menu>
+
+        <v-menu class="navbar-button">
+          <template v-slot:activator="{ on }">
+            <v-btn
                 color="white"
                 text
                 v-on="on"

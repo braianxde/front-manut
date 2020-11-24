@@ -5,6 +5,7 @@ import Login from "@/views/Login";
 import Chamados from "@/views/Chamados";
 import Navbar from "@/components/Navbar";
 import Util from "@/plugins/Util";
+import Tratar from "@/views/Tratar";
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,15 @@ const routes = [
     name: "Chamados",
     components: {
       default: Chamados,
+      menu: Navbar,
+    },
+    props: true
+  },
+  {
+    path: "/Tratar",
+    name: "Tratar",
+    components: {
+      default: Tratar,
       menu: Navbar,
     },
     props: true

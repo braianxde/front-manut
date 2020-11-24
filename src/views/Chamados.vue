@@ -4,16 +4,13 @@
         :headers="headers"
         :items="chamados"
         sort-by="dataAbertura"
-        class="elevation-1"
-    >
+        class="elevation-1">
       <template v-slot:top>
-        <v-toolbar
-            flat
-        >
-          <v-btn class="mr8" fab dark small color="green" @click="abreNovoChamadoDialog()">
-            <v-icon dark>mdi-pencil</v-icon>
+        <v-toolbar flat>
+          <v-btn height="48" width="44" @click="abreNovoChamadoDialog()">
+            <img src="../assets/addChamado.png"/>
           </v-btn>
-          <v-toolbar-title>Meus Chamados</v-toolbar-title>
+          <v-toolbar-title class="ms-6">Meus Chamados</v-toolbar-title>
           <v-divider
               class="mx-4"
               inset
@@ -22,9 +19,9 @@
           <v-spacer></v-spacer>
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]="{ item }">>
-        <v-btn class="mr8" fab dark small color="cyan" @click="detalheChamado(item)">
-          <v-icon dark>mdi-pencil</v-icon>
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-btn height="30" width="30" @click="detalheChamado(item)">
+          <img src="../assets/detalhe.png"/>
         </v-btn>
       </template>
       <template v-slot:no-data>
@@ -57,12 +54,7 @@ export default {
     novoChamado: null,
     chamados: [],
     headers: [
-      {
-        text: 'ID',
-        align: 'start',
-        sortable: false,
-        value: 'id',
-      },
+      {text: 'ID', align: 'start', sortable: false, value: 'id'},
       {text: 'Assunto', value: 'assunto'},
       {text: 'Matrícula', value: 'idUsuario'},
       {text: 'Data Abertura', value: 'dataAbertura'},
@@ -71,7 +63,7 @@ export default {
     ]
   }),
   async created() {
-    console.log(Util.getInfoUsuario().nome);
+    console.log(Util.getInfoUsuario().idAreaTec);
     this.chamados = await axios.get("chamado");
   },
   methods: {
@@ -84,7 +76,7 @@ export default {
     abreNovoChamadoDialog() {
       this.dialogCriarChamado = true
     }
-  },
+  }
 }
 </script>
 

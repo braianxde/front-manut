@@ -34,6 +34,13 @@
             <p class="mb-n2">Texto: {{this.infochamado.texto}} </p>
           </v-card-text>
         </v-card>
+        <v-card v-if="temComentario">
+          <p class="body-2 pt-2 font-weight-bold">Comentários</p>
+          <v-card-text v-for="item in comentarios" :key="item.id" class="body-2 mt-n3 text-left">
+            <p class="mb-1">Data: {{item.dataComentario}}</p>
+            <p class="mb-n2">Comentário: {{item.texto}}</p>
+          </v-card-text>
+      </v-card>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -41,13 +48,12 @@
           Fechar
         </v-btn>
       </v-card-actions>
-
-
     </v-card>
   </v-dialog>
 </template>
 
 <script>
+import axios from "@/plugins/axios";
 
 export default {
   name: "ChamadoDetalheDialog",
@@ -56,10 +62,21 @@ export default {
     infochamado : Object
   },
   data: () => ({
+    comentarios: [],
+    temComentario: true
   }),
+
   async mounted() {
-    
   },
+
+  async created(){
+    let idChamado = this.infochamado.id;
+    this.comentarios = await axios.get("comentarioPorChamado/" + idChamado)
+    if (this.comentarios == []){
+      this.temComentario = false
+    }
+  },
+
   computed: {
     dialogExplorar: {
       get() {

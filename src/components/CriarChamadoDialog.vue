@@ -17,23 +17,29 @@
       <v-card v-if="confPatrimonio" class="mx-auto mb-2" max-width="580">
         <v-card-text>
           <p class="title sm-1 mb-1 text-left">Equipamento</p>
-          <v-btn class="mr8" fab dark small right absolute color="red" @click="pesquisaEquipamento()">
-            <v-icon dark>mdi-pencil</v-icon>
-          </v-btn>
-          <v-text-field input v-model="id_patrimonio" label="Nº Patrimônio" outlined></v-text-field>
-          <p class="body-2 mb-1 mt-n4 text-left">Nome: </p>
-          <p class="body-2 mb-1 text-left">Descrição: </p>
+          <v-row>
+            <v-col cols="9">
+              <v-text-field input v-model="id_patrimonio" label="Nº Patrimônio" outlined></v-text-field>
+            </v-col>
+            <v-col cols="3">
+              <v-btn color="green darken-1" text @click="pesquisaEquipamento()">Buscar</v-btn>
+            </v-col>
+          </v-row>
+          <div v-if="mostraDados">
+            <p class="body-2 mb-1 mt-n4 text-left">Nome: {{this.equipSelecionado.nome}} </p>
+            <p class="body-2 mb-1 text-left">Descrição: {{this.equipSelecionado.descricao}} </p>
+          </div>
         </v-card-text>
       </v-card>
       <v-card class="mx-auto mb-2" max-width="580">
         <v-card-text>
           <p class="title sm-1 mb-1 text-left">Área Técnica</p>
-        <v-select class="mt-n8 text-left" v-model="areaTecnicaSelecionada" :items="areaTecnica"></v-select>
+        <v-select class="mt-n2 text-left" v-model="areaTecnicaSelecionada" :items="areaTecnica"></v-select>
         </v-card-text>
       </v-card>
       <v-card class="mx-auto mb-auto mt-4" max-width="580">
-        <v-textarea label="Assunto" class="mx-4 mt-4" auto-grow outlined rows="1" row-height="15"></v-textarea>
-        <v-textarea label="Texto" class="mx-4 mt-n4" auto-grow outlined rows="4" row-height="30"></v-textarea>
+        <v-textarea label="Assunto" v-model="assunto" class="mx-4 mt-4" auto-grow outlined rows="1" row-height="15"></v-textarea>
+        <v-textarea label="Texto" v-model="texto" class="mx-4 mt-n4" auto-grow outlined rows="4" row-height="30"></v-textarea>
       </v-card>
       <div class="py-4">
         <v-btn class="mr-4" @click="submit">Salvar</v-btn>
@@ -51,8 +57,7 @@ import axios from "@/plugins/axios";
 export default {
   name: "CriarChamadoDialog",
   props: {
-    value: Boolean,
-    infonovochamado : Object
+    value: Boolean
   },
   data: () =>({
     matricula: '',
@@ -61,7 +66,10 @@ export default {
     equipSelecionado: null,
     areaTecnica: [],
     areaTecnicaSelecionada: null,
-    confPatrimonio: false
+    confPatrimonio: false,
+    assunto: '',
+    texto: '',
+    mostraDados: false
   }),
 
   async created() {
@@ -85,14 +93,15 @@ export default {
     async pesquisaEquipamento() {
       let equip = await axios.get("equipamentoId/" + this.id_patrimonio);
       this.equipSelecionado = equip[0];
-      console.log(this.equipSelecionado);
+      this.mostraDados = true
     },
     async submit() {
       let objetoEnviaChamado = {
         idEquipamento: this.id_patrimonio,
-        aaaa: this.id_patrimonio,
-        bbbb: this.id_patrimonio,
-        vvvv: this.id_patrimonio
+        idUsuario: this.matricula,
+        idAreaTec: this.areaTecnicaSelecionada,
+        assunto: this.assunto,
+        texto: this.texto
       };
 
       const retornoCadastroChamado = await axios.post("chamado", objetoEnviaChamado);
