@@ -30,7 +30,7 @@
           </template>
         </v-menu>
 
-        <v-menu class="navbar-button">
+        <v-menu class="navbar-button" v-if="tipoUsuario == 2">
           <template v-slot:activator="{ on }">
             <v-btn
                 @click="navigateTo('Tratar')"
@@ -63,9 +63,16 @@
 </template>
 <script>
 import router from "../plugins/router";
+import Util from "@/plugins/Util";
 
 export default {
   name: "Navbar",
+  data: () =>({
+    tipoUsuario: 0
+  }),
+  created() {
+      this.tipoUsuario = Util.getInfoUsuario().tipo;
+  },
   methods: {
     navigateTo: function (nameRoute) {
       router.push(nameRoute);
